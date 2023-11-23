@@ -274,6 +274,9 @@ async def postAlterarCPF(
     erros = {}
     # validação do campo novoCPF
     is_not_empty(novoCPF, "novoCPF", erros)
+    if is_cpf(novoCPF, "novoCPF", erros):
+        if ClienteRepo.cpfExiste(novoCPF):
+            add_error("cpf", "Já existe um cliente cadastrado com este cpf.", erros)
     # validação do campo confNovoCPF
     is_not_empty(confNovoCPF, "confNovoCPF", erros)
     is_matching_fields(confNovoCPF, "confNovoCPF", novoCPF, "Novo CPF", erros)
