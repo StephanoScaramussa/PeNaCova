@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/cores.css">
+  <title>Pé Na Cova</title>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-5 py-1">
+      <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+        <div class="card-body text-light">
+          <h2 class="card-title text-center mb-4">Seu perfil</h2>
+          <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+          </h2>
+
+          <div class="table-responsive">
+            <table class="table table-brown rounded-3 overflow-hidden text-center table-striped-columns table-hover table-borderless">
+             
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-start text-center">Nome</th>
+                  <td> Administrador 1 </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start text-center">CPF</th>
+                  <td> 145.182.123-98 </td>
+                <tr>
+                  <th scope="row" class="text-start text-center">Email</th>
+                  <td> admin@email.com </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-start text-center">Telefone</th>
+                  <td> (28)99992-6548 </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+            <div class="text-center ">
+              <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
+              <button type="button" class="btn btn-success btn-lg">Alterar</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+{% endblock %}
+
+</html>

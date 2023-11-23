@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/cores.css">
+  <title>Pé Na Cova</title>
+</head>
+
+<body class="teste d-flex align-items-center">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-5 py-1 px-0">
+        <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+          <div class="card-body text-light">
+
+            <h2 class="card-title text-center mb-4">Perfil</h2>
+            <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+            </h2>
+            <form>
+              <div class="mb-3 bi-person-fill">
+                  <label for="nome" class="form-label">Nome</label>
+                  <input type="text" placeholder="Digite seu nome completo" class="form-control" id="nome" name="nome" required>
+              </div>
+              <div class="mb-3 bi-envelope-at-fill">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" placeholder="Digite seu Email" class="form-control" id="email" name="email" required>
+             </div>
+
+
+              <div class="mb-3 bi-card-heading">
+                  <label for="cpf" class="form-label">CPF</label>
+                  <input type="text" placeholder="Digite seu CPF" class="form-control" id="cpf" name="cpf" required>
+              </div>
+              <div class="mb-3 bi-telephone-fill">
+                  <label for="telefone" class="form-label">Telefone</label>
+                  <input class="form-control" placeholder="Digite seu telefone" id="telefone" name="telefone" required>
+              </div>
+              
+
+              
+              <div class="mb-3 bi-lock-fill">
+                  <label for="senha" class="form-label">Senha</label>
+                  <input type="password" placeholder="Digite sua senha" class="form-control" id="senha" name="senha" required>
+              </div>
+              
+              <div class="text-center ">
+                  <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
+                  <button type="button" class="btn btn-success btn-lg">Salvar</button>
+              </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}
+
+</html>

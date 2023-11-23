@@ -1,0 +1,210 @@
+<!-- /templates/base.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/lib/bootstrap/js/bootstrap.bundle.js">
+  <link rel="stylesheet" href="/static/css/cores.css">
+  <title>Pé Na Cova</title>
+</head>
+
+<body class="marrom2 bg-opacity-25">
+  <header>
+    <div class="verde">
+      <div class="container">
+        <div class="row justify-content-between py-2">
+          <div class="col-sm d-grid d-sm-inline justify-content-center justify-content-sm-start">
+            <p class="mb-0"><span class="bi bi-telephone-fill text-light"></span> <a
+                class="text-decoration-none text-light fs-5" href="#">(28)99969-4207</a></p>
+          </div>
+          <div class="col d-flex justify-content-sm-end justify-content-center">
+            <div class="d-inline-block">
+              <p class="mb-0 d-flex">
+                <a href="#"
+                  class="d-flex align-items-center justify-content-center text-decoration-none text-light fs-5"><span
+                    class="bi bi-facebook"><i
+                      class="text-decoration-none text-light fs-5 mx-1 d-none d-lg-inline">Facebook</i></span></a>
+                <a href="#"
+                  class="d-flex align-items-center justify-content-center text-decoration-none text-light fs-5 mx-4"><span
+                    class="bi bi-twitter"><i
+                      class="text-decoration-none text-light fs-5 mx-1 d-none d-lg-inline">Twitter</i></span></a>
+                <a href="#"
+                  class="d-flex align-items-center justify-content-center text-decoration-none text-light fs-5"><span
+                    class="bi bi-instagram"><i
+                      class="text-decoration-none text-light fs-5 mx-1 d-none d-lg-inline">Instagram</i></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark marrom">
+      <div class="container">
+        <a href="/" class="text-center col-12 col-sm text-lg-start"> <img width="90px" height="100px"
+            src="/static/img/download.png"> </a>
+        <button class="navbar-toggler col-12 col-lg mt-2 mt-lg-0 text-light" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNav">
+          <span class="bi bi-list me-1"></span>Menu
+        </button>
+        <div class="collapse navbar-collapse justify-content-lg-start justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <div class="d-lg-flex d-inline">
+              <li class="nav-item"><a class="nav-link fs-7" href="/">Início</a></li>
+              <li class="nav-item"><a class="nav-link fs-7" href="/planos">Planos</a></li>
+              <li class="nav-item"><a class="nav-link fs-7" href="/urnas">Urnas</a></li>
+              <li class="nav-item"><a class="nav-link fs-7" href="/apoios">Apoio</a></li>
+              <li class="nav-item"><a class="nav-link fs-7" href="/flores">Flores</a></li>
+              <li class="nav-item"><a class="nav-link fs-7" href="/evento/listagem">Eventos</a></li>
+            </div>
+          </ul>
+        </div>
+        {% if not usuario: %}
+        
+        <a href="/cliente/registro" class="btn btn-link text-decoration-none text-white col-6 col-lg mt-2 mt-lg-0">
+            Registro
+        </a>
+        <a href="/login" class="btn btn-light col-6 col-lg mt-2 mt-lg-0">
+          Login
+        </a>
+        {% else: %}
+        <a href="/logout" class="btn btn-link text-decoration-none text-white col-6 col-lg mt-2 mt-lg-0">
+            Sair
+        </a>
+        <a href="/cliente/perfil" class="btn btn-light col-6 col-lg mt-2 mt-lg-0">
+            Perfil
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="/static/js/popper.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="/static/js/nav.js"></script>
+  <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+  <script src="https://mediafiles.botpress.cloud/cd207f7c-3e76-457c-9dfa-0e45cb4eface/webchat/config.js" defer></script>
+
+
+  <!-- MODALS -->
+
+  <!-- Modal Login -->
+  <div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      {% if not logado: %}
+      {% if request.query_params["returnUrl"]: %}
+      <p class="lead">A página que você tentou acessar requer que esteja logado. Faça o login para prosseguir.</p>
+      {% endif %}
+      <div class="modal-content marrom">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2 text-light">Login</h1>
+        </div>
+        <div class="modal-body p-5 pt-0">
+          <form class="" method="post" action="/login">
+            <div class="input-group mb-3">
+              <span class="input-group-text bi bi-envelope-at-fill"></span>
+              <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInputGroup1" placeholder="nome@email.com">
+                <label for="floatingInputGroup1">Email</label>
+                <span class="text-danger d-none small"></span>
+              </div>
+            </div>
+            <div class="input-group mb-1">
+              <span class="input-group-text bi bi-key-fill"></span>
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingInputGroup2" placeholder="Ex.:Senh@123">
+                <label for="floatingInputGroup1">Senha</label>
+                <span class="text-danger d-none small"></span>
+              </div>
+            </div>
+            <button class="btn btn-link text-white" type="button" data-toggle="modal" data-target="#senhaModal">Esqueceu
+              sua senha?</button>
+            <a href="/cliente/registro"><button class="btn btn-link text-white" type="button">Cadastre-se
+                aqui!</button></a>
+            <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Entrar</button>
+          </form>
+          {% if request.query_params["status"] and request.query_params["status"] == "403": %}
+          <p class="lead">Seu perfil de usuário não tem autorização de acesso à página solicitada. Caso essa permissão
+            seja necessária, entre em contato com o administrador do sistema.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default text-light" data-dismiss="modal">Fechar</button>
+        </div>
+        {% else: %}
+        <h3>Você já está logado.</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Alterar Senha -->
+  <div class="modal fade" id="senhaModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content marrom">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h1 class="fw-bold mb-0 fs-2 text-light">Alterar senha</h1>
+        </div>
+        <div class="modal-body p-5 pt-0">
+          <form class="">
+
+            <div class="input-group mb-3">
+              <div class="form-floating">
+                <input type="password" class="form-control" id="floatingInputGroup3" placeholder="nome@email.com">
+                <label for="floatingInputGroup1">Insira seu email</label>
+              </div>
+            </div>
+            <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Enviar</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default text-light" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <main class="d-block">
+    {% block conteudo %}
+    {% endblock %}
+  </main>
+
+  <div class="marrom d-flex mt-4 py-4">
+    <footer class="container">
+      <div class="border-top row text-white">
+        <a href="/" class=" col-12 text-center my-3 text-decoration-none px-0">
+          <img src="/static/img/download.png" width="90" height="100">
+        </a>
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3 pe-0">
+          <li class="nav-item"><a href="/eventos" class="nav-link px-2 text-light">Eventos</a></li>
+          <li class="nav-item"><a href="/planos" class="nav-link px-2 text-light">Planos</a></li>
+          <li class="nav-item"><a href="/sobre" class="nav-link px-2 text-light">Sobre Nós</a></li>
+        </ul>
+        <p class="col">© 2023 LAGS Softwares, Inc. Todos os direitos reservados.</p>
+        <ul class="list-unstyled d-flex col justify-content-end">
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><span class="bi bi-facebook text-light"></span></a>
+          </li>
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><span class="bi bi-twitter text-light"></span></a>
+          </li>
+          <li class="ms-3"><a class="link-body-emphasis" href="#"><span class="bi bi-instagram text-light"></span></a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

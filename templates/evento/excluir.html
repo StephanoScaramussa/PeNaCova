@@ -1,0 +1,16 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+<div class="container marrom p-3 mt-4 rounded-3">
+<h1 class="text-light">Exclusão de Evento</h1>
+<hr class="text-light px-5">
+<p class="lead text-light">Deseja realmente excluir o evento? <b>{{ evento.nome }}</b></p>
+<form action="/evento/excluir" method="post">
+    <input type="hidden" name="id" value="{{ evento.id }}">
+    <div class="mb-3">
+        <a href="/evento/listagem" class="btn btn-secondary me-2">Cancelar</a>
+        <button class="btn btn-danger" type="submit">Excluir</button>
+    </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "basepnc.html" %}
+{% block conteudo %}
+<div class="d-grid justify-content-center align-items-center mt-2">
+    <h1 class="row text-white py-4">Eventos Cadastrados</h1>
+    <a href="/evento/novo" class="btn btn-success btn-sm" title="Excluir">Novo</a>
+</div>
+{% if eventos|length == 0 %}
+<p class="text-center">Não há eventos cadastrados.</p>
+{% else %}
+<div class="album py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for e in eventos %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <rect width="100%" height="100%" fill="#55595c"><img class="bd-placeholder-img card-img-top"
+                            width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false"
+                            src="{{ e.imagem }}"></rect>
+                    <div class="card-body">
+                        <h1 class="card-text">{{ e.titulo }}</h1>
+                        <p class="card-text">{{ e.descricao }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                                <a href="/evento/excluir/{{ e.id }}" class="btn btn-danger btn-sm" title="Excluir"
+                                    data-bs-toggle="tooltip" data-bs-placement="left">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% if totalPaginas > 1 %}
+<div class="container">
+<nav aria-label="...">
+    <ul class="pagination pagination-sm justify-content-center">
+        <li class="page-item">
+            <a class="page-link {{ 'disabled' if (paginaAtual == 1) }}"
+                href="/evento/listagem?pa=1&tp={{ tamanhoPagina }}" style="background-color: #29792e; border-color: #ffffff;">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link {{ 'disabled' if (paginaAtual == 1) }}"
+                href="/evento/listagem?pa={{ paginaAtual-1 }}&tp={{ tamanhoPagina }}" style="background-color: #29792e; border-color: #ffffff;">
+                <i class="bi bi-arrow-left-short"></i>
+            </a>
+        </li>
+
+        {% for i in range(totalPaginas) %}
+        <li class="page-item">
+            <a class="page-link {{ 'active' if (paginaAtual == i+1) }}"
+                href="/evento/listagem?pa={{ i+1 }}&tp={{ tamanhoPagina }}" style="background-color: #29792e; border-color: #ffffff;">{{ i+1 }}</a>
+        </li>
+        {% endfor %}
+
+        <li class="page-item">
+            <a class="page-link {{ 'disabled' if (paginaAtual == totalPaginas) }}"
+                href="/evento/listagem?pa={{ paginaAtual+1 }}&tp={{ tamanhoPagina }}" style="background-color: #29792e; border-color: #ffffff;">
+                <i class="bi bi-arrow-right-short"></i>
+            </a>
+        </li>
+
+        <li class="page-item">
+            <a class="page-link {{ 'disabled' if (paginaAtual == totalPaginas) }}"
+                href="/evento/listagem?pa={{ totalPaginas }}&tp={{ tamanhoPagina }}" style="background-color: #29792e; border-color: #ffffff;">
+                <i class="bi bi-arrow-right"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+{% if not logado: %}
+<div class="container">
+    <div class="p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2 text-light">Login</h1>
+    </div>
+    <div class="p-5 pt-0">
+        <form class="" method="post">
+            <div class="input-group mb-3">
+                <span class="input-group-text bi bi-envelope-at-fill"></span>
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInputGroup1" placeholder="nome@email.com">
+                    <label for="floatingInputGroup1">Email</label>
+                    <span class="text-danger d-none small"></span>
+                </div>
+            </div>
+            <div class="input-group mb-1">
+                <span class="input-group-text bi bi-key-fill"></span>
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingInputGroup2" placeholder="Ex.:Senh@123">
+                    <label for="floatingInputGroup1">Senha</label>
+                    <span class="text-danger d-none small"></span>
+                </div>
+            </div>
+            <button class="btn btn-link text-white" type="button" data-toggle="modal" data-target="#senhaModal">Esqueceu
+                sua senha?</button>
+            <a href="/cliente/registro"><button class="btn btn-link text-white" type="button">Cadastre-se
+                    aqui!</button></a>
+            <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Entrar</button>
+        </form>
+    </div>
+{% endif %}
+</div>
+
+<!-- Modal Alterar Senha -->
+<div class="modal fade" id="senhaModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content marrom">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2 text-light">Alterar senha</h1>
+            </div>
+            <div class="modal-body p-5 pt-0">
+                <form class="">
+
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="floatingInputGroup3"
+                                placeholder="nome@email.com">
+                            <label for="floatingInputGroup1">Insira seu email</label>
+                        </div>
+                    </div>
+                    <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Enviar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default text-light" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

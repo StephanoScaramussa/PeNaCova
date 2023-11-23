@@ -1,0 +1,111 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+
+<div class="text-center">
+    <h1 class="text-white py-4"> Planos </h1>
+</div>
+
+<main class="container">
+    <div class="row row-cols-1 row-cols-md-3 mb-5 text-center">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm marrom text-white mx-3">
+          <div class="card-header py-3 verde text-white">
+            <h4 class="my-0 fw-normal">Esqueleto</h4>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title pricing-card-title py-2">$39,99<small>/mês</small></h4>
+            <img src="/static/img/skf1.png" class="card-img w-75 w-75 border border-light-subtle">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Higienização simples</li>
+              <li>Traslado de até 50km</li>
+              <li>Caixões simples</li>
+              <li>Apoio com IA</li>
+            </ul>
+            <a href="/plano1" class="text-decoration-none text-white"> <button type="button" class="w-100 btn btn-lg btn-success text-white"> Assinar </button> </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm marrom text-white mx-3">
+          <div class="card-header py-3 verde text-white">
+            <h4 class="my-0 fw-normal">Mega esqueleto</h4>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title pricing-card-title py-2">$69,99<small>/mês</small></h4>
+            <img src="/static/img/skf2.png" class="card-img w-75 w-75 border border-light-subtle">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Higienização e tanatopraxia</li>
+              <li>Traslado de até 100km</li>
+              <li>Caixões especiais</li>
+              <li>Apoio com psicólogo</li>
+            </ul>
+            <a href="/plano2" class="text-decoration-none text-white"> <button type="button" class="w-100 btn btn-lg btn-success text-white"> Assinar </button> </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 shadow-sm marrom text-white mx-3">
+          <div class="card-header py-3 verde text-white">
+            <h4 class="my-0 fw-normal">Esqueleto rei</h4>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title pricing-card-title py-2">$119,99<small>/mês</small></h4>
+            <img src="/static/img/skf3.png" class="card-img w-75 w-75 border border-light-subtle">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Tanatopraxia e tematização</li>
+              <li>Traslado de até 150km</li>
+              <li>Caixões exclusivos</li>
+              <li>Apoio familiar com psicólogo</li>
+            </ul>
+            <a href="/plano3" class="text-decoration-none text-white"> <button type="button" class="w-100 btn btn-lg btn-success text-white"> Assinar </button> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive py-3">
+        <table class="table table-brown rounded-3 overflow-hidden text-center table-striped-columns table-hover table-borderless">
+          <thead>
+            <tr>
+              <th style="width: 34%;"></th>
+              <th style="width: 22%;">Esqueleto</th>
+              <th style="width: 22%;">Mega esqueleto</th>
+              <th style="width: 22%;">Esqueleto rei</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="text-start text-center">Carência de 60 dias</th>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-center">Apoio com IA</th>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+            <tr>
+              <th scope="row" class="text-start text-center">Apoio com psicólogo</th>
+              <td></td>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <th scope="row" class="text-start text-center">Eventos exclusivos</th>
+              <td></td>
+              <td class="bi bi-check"></td>
+              <td class="bi bi-check"></td>
+            </tr>
+            <tr>
+              <th scope="row" class="text-start text-center">Todos os caixões disponíveis</th>
+              <td></td>
+              <td></td>
+              <td class="bi bi-check"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+{% endblock %}
