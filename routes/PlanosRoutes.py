@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
+from models.Usuario import Usuario
+from util.security import validar_usuario_logado
 from util.templateFilters import formatarData
 
 
@@ -13,21 +15,21 @@ async def startup_event():
 
 
 @router.get("/planos")
-async def getPlanos(request: Request):
+async def getPlanos(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
     return templates.TemplateResponse(
-        "penacova/planos.html", { "request": request })
+        "penacova/planos.html", { "request": request, "usuario" : usuario })
 
 @router.get("/plano1")
-async def getPlano1(request: Request):
+async def getPlano1(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
     return templates.TemplateResponse(
-        "penacova/plano1.html", { "request": request })
+        "penacova/plano1.html", { "request": request, "usuario" : usuario })
 
 @router.get("/plano2")
-async def getPlano2(request: Request):
+async def getPlano2(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
     return templates.TemplateResponse(
-        "penacova/plano2.html", { "request": request })
+        "penacova/plano2.html", { "request": request, "usuario" : usuario })
 
 @router.get("/plano3")
-async def getPlano3(request: Request):
+async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
     return templates.TemplateResponse(
-        "penacova/plano3.html", { "request": request })
+        "penacova/plano3.html", { "request": request, "usuario" : usuario })

@@ -15,6 +15,7 @@ from util.template import capitalizar_nome_proprio, formatarData
 
 router = APIRouter(prefix="/cliente")
 templates = Jinja2Templates(directory="templates")
+#!!!!!!!!!!!!!
 
 @router.on_event("startup")
 async def startup_event():
@@ -26,49 +27,6 @@ async def getRegistro(request: Request, usuario: Usuario = Depends(validar_usuar
         "cliente/registro.html",
         {"request": request, "usuario": usuario},
     )
-
-# @router.post("/registro_json")
-# async def postRegistroJson(
-#     nome: str = Form(
-#         ..., min_length=3, max_length=50, regex=r"^((\b[A-zÀ-ú']{2,40}\b)\s*){2,}$"
-#     ),
-#     cpf: str = Form(..., min_length=11, max_length=11, regex=r"^ [0-9]+$"),
-#     email: str = Form(
-#         ...,
-#         regex=r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-#     ),
-#     telefone: str = Form(..., min_length=10, max_length=11, regex=r"^ [0-9]+$"),
-#     senha: str = Form(..., min_length=6, max_length=20),
-#     confSenha: str = Form(..., min_length=6, max_length=20),
-# ):
-#     if senha.strip() != confSenha.strip():
-#         listaErros = []
-#         listaErros.append(
-#             {
-#                 "type": "field_dont_match",
-#                 "loc": ("body", "senha"),
-#                 "msg": "Senhas não conferem.",
-#             }
-#         )
-#         listaErros.append(
-#             {
-#                 "type": "field_dont_match",
-#                 "loc": ("body", "confSenha"),
-#                 "msg": "Senhas não conferem.",
-#             }
-#         )
-#         raise RequestValidationError(listaErros)
-#     ClienteRepo.inserir(
-#         Cliente(
-#             id=0,
-#             nome=nome.strip(),
-#             cpf=cpf.strip(),
-#             email=email.strip(),
-#             telefone=telefone.strip(),
-#             senha=senha.strip(),
-#         )
-#     )
-#     return JSONResponse({"ok": True, "returnUrl": "/"}, status_code=status.HTTP_200_OK).
 
 @router.post("/registro")
 async def postRegistro(
@@ -130,17 +88,21 @@ async def postRegistro(
             cpf=cpf,
             email=email,
             telefone=telefone,
-            senha=senha,
+            senha=obter_hash_senha(senha),
         )
     )
 
     # mostra página de sucesso
-    token = gerar_token()
-    cliente = ClienteRepo.obterClientePorCPF(cpf)
-    ClienteRepo.inserirToken(token, cliente.id)
-    response = RedirectResponse("/", status.HTTP_302_FOUND)
-    response.set_cookie(key="auth_token", value=token, max_age=1800, httponly=True)
-    return response
+    # token = gerar_token()
+    # cliente = ClienteRepo.obterClientePorCPF(cpf)
+    # ClienteRepo.inserirToken(token, cliente.id)
+    # response = RedirectResponse("/", status.HTTP_302_FOUND)
+    # response.set_cookie(key="auth_token", value=token, max_age=1800, httponly=True)
+    # return response
+    return templates.TemplateResponse(
+        "main/index.html",
+        {"request": request, "usuario": usuario},
+    )
 
 
 

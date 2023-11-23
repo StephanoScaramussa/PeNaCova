@@ -2,37 +2,35 @@
 
 {% block conteudo %}
 {% if not logado: %}
-<div class="container">
-    <div class="p-5 pb-4 border-bottom-0">
-        <h1 class="fw-bold mb-0 fs-2 text-light">Login</h1>
-    </div>
-    <div class="p-5 pt-0">
-        <form class="" method="post">
-            <div class="input-group mb-3">
-                <span class="input-group-text bi bi-envelope-at-fill"></span>
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInputGroup1" placeholder="nome@email.com">
-                    <label for="floatingInputGroup1">Email</label>
-                    <span class="text-danger d-none small"></span>
-                </div>
-            </div>
-            <div class="input-group mb-1">
-                <span class="input-group-text bi bi-key-fill"></span>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingInputGroup2" placeholder="Ex.:Senh@123">
-                    <label for="floatingInputGroup1">Senha</label>
-                    <span class="text-danger d-none small"></span>
-                </div>
-            </div>
-            <button class="btn btn-link text-white" type="button" data-toggle="modal" data-target="#senhaModal">Esqueceu
-                sua senha?</button>
-            <a href="/cliente/registro"><button class="btn btn-link text-white" type="button">Cadastre-se
-                    aqui!</button></a>
-            <button class="w-100 my-3 btn btn-lg rounded-3 verde text-light" type="submit">Entrar</button>
-        </form>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-5 py-1">
+        <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+          <div class="card-body text-light">
+            <h2 class="card-title text-center mb-4">Login</h2>
+            <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+            </h2>
+            <form method="post">
+              <div class="mb-3 bi-envelope-at-fill">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" placeholder="Digite seu Email" class="form-control" id="email" name="email">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-lock-fill">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" placeholder="Digite sua senha" class="form-control" id="senha" name="senha">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="text-center ">
+                <button type="reset" class="btn btn-secondary btn-lg">Cancelar</button>
+                <button type="submit" class="btn btn-success btn-lg">Entrar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 {% endif %}
-</div>
 
 <!-- Modal Alterar Senha -->
 <div class="modal fade" id="senhaModal" role="dialog">
@@ -62,5 +60,13 @@
         </div>
     </div>
 </div>
+
+{% if erros and valores %}
+<script>
+  const validationErrors = {{ erros|tojson }}
+  const fieldValues = {{ valores|tojson }}
+</script>
+<script src="/static/js/formValidation.js"></script>
+{% endif %}
 
 {% endblock %}

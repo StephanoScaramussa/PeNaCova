@@ -7,6 +7,7 @@ from models.Usuario import Usuario
 from repositories.ClienteRepo import ClienteRepo
 from util.security import gerar_token, validar_usuario_logado, verificar_senha
 from util.templateFilters import formatarData
+from util.validators import add_error, is_email, is_not_empty
 
 
 router = APIRouter()
@@ -27,10 +28,10 @@ async def getIndex(
 
 @router.get("/login")
 async def getLogin(
-    request: Request, cliente: Cliente = Depends(validar_usuario_logado)
+    request: Request, usuario: Usuario = Depends(validar_usuario_logado)
 ):
     return templates.TemplateResponse(
-        "main/login.html", {"request": request, "cliente": cliente}
+        "main/login.html", {"request": request, "usuario": usuario}
     )
 
 @router.post("/login")
@@ -46,43 +47,47 @@ async def postLogin(
     senha = senha.strip()
     
     # validação de dados
-    # erros = {}
+    erros = {}
     # validação do campo email
-    # is_not_empty(email, "email", erros)
-    # is_email(email, "email", erros)
+    is_not_empty(email, "email", erros)
+    is_email(email, "email", erros)
     # validação do campo senha
-    # is_not_empty(senha, "senha", erros)
+    is_not_empty(senha, "senha", erros)
         
+    
     # só checa a senha no BD se os dados forem válidos
-    hash_senha_bd = ClienteRepo.obterSenhaDeEmail(email)
-    if hash_senha_bd:
-        print(senha)
-        print(verificar_senha(senha, hash_senha_bd))
-        if verificar_senha(senha, hash_senha_bd):
-            token = gerar_token()
-            if ClienteRepo.alterarToken(email, token):
-                response = RedirectResponse('/', status.HTTP_302_FOUND)
-                response.set_cookie(
-                    key="auth_token", value=token, max_age=1800, httponly=True
-                )
-                return response
-            else:
-                raise Exception(
-                    "Não foi possível alterar o token do usuário no banco de dados."
-                )
+    if len(erros) == 0:
+        hash_senha_bd = ClienteRepo.obterSenhaDeEmail(email)
+        if hash_senha_bd:
+            if verificar_senha(senha, hash_senha_bd):
+                token = gerar_token()
+                if ClienteRepo.alterarToken(email, token):
+                    response = RedirectResponse(returnUrl, status.HTTP_302_FOUND)
+                    response.set_cookie(
+                        key="auth_token", value=token, max_age=1800, httponly=True
+                    )
+                    return response
+                else:
+                    raise Exception(
+                        "Não foi possível alterar o token do usuário no banco de dados."
+                    )
+            else:            
+                add_error("senha", "Senha não confere.", erros)
+        else:
+            add_error("email", "Usuário não cadastrado.", erros)
 
-    # if len(erros) > 0:
-    #     valores = {}
-    #     valores["email"] = email        
-    #     return templates.TemplateResponse(
-    #         "main/index.html",
-    #         {
-    #             "request": request,
-    #             "usuario": usuario,
-    #             "erros": erros,
-    #             "valores": valores,
-    #         },
-    #     )
+    if len(erros) > 0:
+        valores = {}
+        valores["email"] = email        
+        return templates.TemplateResponse(
+            "main/login.html",
+            {
+                "request": request,
+                "usuario": usuario,
+                "erros": erros,
+                "valores": valores,
+            },
+        )
     
 @router.get("/logout")
 async def getLogout(

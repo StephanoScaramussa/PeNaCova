@@ -2,17 +2,16 @@
 import secrets
 import bcrypt
 from fastapi import Request
-from models.Cliente import Cliente
 from models.Usuario import Usuario
 from repositories.ClienteRepo import ClienteRepo
 
-def validar_usuario_logado(request: Request) -> Cliente | None:
+def validar_usuario_logado(request: Request) -> Usuario | None:
     try:
         token = request.cookies["auth_token"]
         if token.strip() == "":
             return None
-        cliente = ClienteRepo.obterClientePorToken(token)
-        return cliente
+        usuario = ClienteRepo.obterClientePorToken(token)
+        return usuario
     except KeyError:
         return None    
 

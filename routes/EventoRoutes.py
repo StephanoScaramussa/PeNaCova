@@ -20,6 +20,7 @@ async def getListagem(
     request: Request,
     pa: int = 1,
     tp: int = 3,
+    usuario: Usuario = Depends(validar_usuario_logado)
 ):
     
     eventos = EventoRepo.obterPagina(pa, tp)
@@ -32,26 +33,40 @@ async def getListagem(
             "totalPaginas": totalPaginas,
             "paginaAtual": pa,
             "tamanhoPagina": tp,
+            "usuario": usuario,
         },
     )
 
 @router.get("/novo", response_class=HTMLResponse)
-async def getNovo(request: Request):
-    return templates.TemplateResponse(
-        "evento/novo.html", {"request": request}
-    )
-
+async def getNovo(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
+    if usuario:
+        if usuario.admin:
+            return templates.TemplateResponse(
+                "evento/novo.html", {"request": request, "usuario": usuario}
+            )
+        else:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    
 @router.post("/novo")
 async def postNovo(
     request: Request,
     titulo: str = Form(""),
     imagem: str = Form(""),
     descricao: str = Form(""),
+    usuario: Usuario = Depends(validar_usuario_logado)
 ):
-    EventoRepo.inserir(Evento(0, titulo, imagem, descricao))
-    return RedirectResponse(
-        "/evento/listagem", status_code=status.HTTP_303_SEE_OTHER
-    )
+    if usuario:
+        if usuario.admin:
+            EventoRepo.inserir(Evento(0, titulo, imagem, descricao))
+            return RedirectResponse(
+                "/evento/listagem", status_code=status.HTTP_303_SEE_OTHER
+            )
+        else:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
 @router.get("/excluir/{id:int}", response_class=HTMLResponse)
 async def getExcluir(

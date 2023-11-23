@@ -1,8 +1,10 @@
 {% extends "basepnc.html" %}
 {% block conteudo %}
 <div class="d-grid justify-content-center align-items-center mt-2">
-    <h1 class="row text-white py-4">Eventos Cadastrados</h1>
-    <a href="/evento/novo" class="btn btn-success btn-sm" title="Excluir">Novo</a>
+    <h1 class="row text-white py-4">Eventos Disponíveis</h1>
+    {% if usuario and usuario.admin: %}
+    <a href="/evento/novo" class="btn btn-success btn-sm" title="novoevento">Novo</a>
+    {% endif %}
 </div>
 {% if eventos|length == 0 %}
 <p class="text-center">Não há eventos cadastrados.</p>
@@ -20,6 +22,7 @@
                         <h1 class="card-text">{{ e.titulo }}</h1>
                         <p class="card-text">{{ e.descricao }}</p>
                         <div class="d-flex justify-content-between align-items-center">
+                            {% if usuario and usuario.admin: %}
                             <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
                                 <a href="/evento/excluir/{{ e.id }}" class="btn btn-danger btn-sm" title="Excluir"
@@ -27,6 +30,7 @@
                                     <i class="bi bi-trash"></i>
                                 </a>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

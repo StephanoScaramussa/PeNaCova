@@ -229,14 +229,14 @@ class ClienteRepo:
             return None
         
     @classmethod
-    def obterClientePorToken(cls, token: str) -> Cliente:
-        sql = "SELECT nome, cpf, email, telefone, token, admin FROM cliente WHERE token=?"
+    def obterClientePorToken(cls, token: str) -> Usuario:
+        sql = "SELECT id, nome, email, admin FROM cliente WHERE token=?"
         conexao = Database.criarConexao()
         cursor = conexao.cursor()
         # quando se executa fechone em um cursor sem resultado, ele retorna None
         resultado = cursor.execute(sql, (token,)).fetchone()
         if resultado:
-            objeto = Cliente(*resultado)
+            objeto = Usuario(*resultado)
             return objeto
         else:
             return None
