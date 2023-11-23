@@ -40,7 +40,7 @@ async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario
         return templates.TemplateResponse(
             "penacova/plano1pagar.html", { "request": request, "usuario" : usuario })
     else:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        raise HTTPException(status_code=401)
 
 @router.get("/plano2pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
