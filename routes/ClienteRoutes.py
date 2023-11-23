@@ -332,7 +332,7 @@ async def postAlterarEmail(
     is_not_empty(novoEmail, "novoEmail", erros)
     if is_email(novoEmail, "novoEmail", erros):
         if ClienteRepo.emailExiste(novoEmail):
-            add_error("email", "Já existe um cliente cadastrado com este e-mail.", erros)
+            add_error("novoEmail", "Já existe um cliente cadastrado com este e-mail.", erros)
     # validação do campo confNovoEmail
     is_not_empty(confNovoEmail, "confNovoEmail", erros)
     is_matching_fields(confNovoEmail, "confNovoEmail", novoEmail, "Novo Email", erros)
