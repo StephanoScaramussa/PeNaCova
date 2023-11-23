@@ -4,5 +4,5 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJMfnrOqP70Qwg8FE4ggEDIceDwFvCiGu8NT6Hi93NNG
   git add README.md
   git commit -m "first commit"
   git branch -M main
-  git remote add origin https://github.com/StephanoScaramussa/PeNaCova.git
+  git remote add origin git@github.com:StephanoScaramussa/PeNaCova.git
   git push -u origin main
