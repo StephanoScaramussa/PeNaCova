@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from models.Usuario import Usuario
 from util.security import validar_usuario_logado
@@ -40,7 +41,7 @@ async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario
         return templates.TemplateResponse(
             "penacova/plano1pagar.html", { "request": request, "usuario" : usuario })
     else:
-        raise HTTPException(status_code=401)
+        return RedirectResponse("/login")
 
 @router.get("/plano2pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
@@ -48,7 +49,7 @@ async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario
         return templates.TemplateResponse(
             "penacova/plano2pagar.html", { "request": request, "usuario" : usuario })
     else:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        return RedirectResponse("/login")
 
 @router.get("/plano3pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
@@ -56,4 +57,4 @@ async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario
         return templates.TemplateResponse(
             "penacova/plano3pagar.html", { "request": request, "usuario" : usuario })
     else:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        return RedirectResponse("/login")
