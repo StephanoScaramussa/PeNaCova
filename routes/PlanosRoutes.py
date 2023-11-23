@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.templating import Jinja2Templates
 from models.Usuario import Usuario
 from util.security import validar_usuario_logado
@@ -36,15 +36,24 @@ async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario
 
 @router.get("/plano1pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
-    return templates.TemplateResponse(
-        "penacova/plano1pagar.html", { "request": request, "usuario" : usuario })
+    if usuario:
+        return templates.TemplateResponse(
+            "penacova/plano1pagar.html", { "request": request, "usuario" : usuario })
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
 @router.get("/plano2pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
-    return templates.TemplateResponse(
-        "penacova/plano2pagar.html", { "request": request, "usuario" : usuario })
+    if usuario:
+        return templates.TemplateResponse(
+            "penacova/plano2pagar.html", { "request": request, "usuario" : usuario })
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
 @router.get("/plano3pagar")
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
-    return templates.TemplateResponse(
-        "penacova/plano3pagar.html", { "request": request, "usuario" : usuario })
+    if usuario:
+        return templates.TemplateResponse(
+            "penacova/plano3pagar.html", { "request": request, "usuario" : usuario })
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
