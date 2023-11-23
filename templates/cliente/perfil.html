@@ -30,26 +30,28 @@
               <tbody>
                 <tr>
                   <th scope="row" class="text-start text-center">Nome</th>
-                  <td> Administrador 1 </td>
+                  <td> {{cliente.nome}} </td>
+                  <td> <a href="/cliente/alterarnome" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a> </td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-start text-center">CPF</th>
-                  <td> 145.182.123-98 </td>
+                  <td> {{cliente.cpf}} </td>
+                  <td> <a href="/cliente/alterarcpf" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a> </td>
                 <tr>
                   <th scope="row" class="text-start text-center">Email</th>
-                  <td> admin@email.com </td>
+                  <td> {{cliente.email}} </td>
+                  <td> <a href="/cliente/alteraremail" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a> </td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-start text-center">Telefone</th>
-                  <td> (28)99992-6548 </td>
+                  <td> {{cliente.telefone}} </td>
+                  <td> <a href="/cliente/alterartelefone" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a> </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
             <div class="text-center ">
-              <button type="button" class="btn btn-danger btn-lg">Cancelar</button>
-              <button type="button" class="btn btn-success btn-lg">Alterar</button>
+              <a href="/cliente/alterarsenha" class="btn btn-warning">Alterar Senha</a>
             </div>
         </div>
       </div>

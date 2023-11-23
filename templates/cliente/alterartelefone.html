@@ -1,0 +1,53 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/cores.css">
+  <title>Pé Na Cova</title>
+</head>
+
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-5 py-1">
+      <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+        <div class="card-body text-light">
+          <h2 class="card-title text-center mb-4">Alterar Telefone</h2>
+          <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+          </h2>
+          <form method="post">
+            <div class="mb-3">
+                <label for="senha" class="form-label">Novo Telefone</label>
+                <input type="text" placeholder="Digite seu Telefone" class="form-control" id="novoTelefone" name="novoTelefone">
+                <span class="text-warning d-none small"></span>
+              </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Confirmar novo Telefone</label>
+                <input type="text" placeholder="Digite novamente o novo Telefone" class="form-control" id="confNovoTelefone" name="confNovoTelefone">
+                <span class="text-warning d-none small"></span>
+              </div>
+            <div class="text-center ">
+              <a href="/cliente/perfil" class="btn btn-secondary me-2 py-2">Cancelar</a>
+              <button type="submit" class="btn btn-success btn-lg">Alterar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if erros: %}
+<script>
+    const validationErrors = {{ erros|tojson }};
+    const fieldValues = [];
+</script>
+<script src="/static/js/formValidation.js"></script>
+{% endif %}
+
+{% endblock %}

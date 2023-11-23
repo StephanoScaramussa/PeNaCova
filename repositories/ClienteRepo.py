@@ -100,6 +100,62 @@ class ClienteRepo:
         else:
             conexao.close()
             return False
+    
+    @classmethod
+    def alterarNome(cls, id: int, nome: str) -> bool:
+        sql = "UPDATE cliente SET nome=? WHERE id=?"
+        conexao = Database.criarConexao()
+        cursor = conexao.cursor()
+        resultado = cursor.execute(sql, (nome, id))
+        if resultado.rowcount > 0:
+            conexao.commit()
+            conexao.close()
+            return True
+        else:
+            conexao.close()
+            return False
+        
+    @classmethod
+    def alterarCPF(cls, id: int, cpf: str) -> bool:
+        sql = "UPDATE cliente SET cpf=? WHERE id=?"
+        conexao = Database.criarConexao()
+        cursor = conexao.cursor()
+        resultado = cursor.execute(sql, (cpf, id))
+        if resultado.rowcount > 0:
+            conexao.commit()
+            conexao.close()
+            return True
+        else:
+            conexao.close()
+            return False
+    
+    @classmethod
+    def alterarEmail(cls, id: int, email: str) -> bool:
+        sql = "UPDATE cliente SET email=? WHERE id=?"
+        conexao = Database.criarConexao()
+        cursor = conexao.cursor()
+        resultado = cursor.execute(sql, (email, id))
+        if resultado.rowcount > 0:
+            conexao.commit()
+            conexao.close()
+            return True
+        else:
+            conexao.close()
+            return False
+        
+    @classmethod
+    def alterarTelefone(cls, id: int, telefone: str) -> bool:
+        sql = "UPDATE cliente SET telefone=? WHERE id=?"
+        conexao = Database.criarConexao()
+        cursor = conexao.cursor()
+        resultado = cursor.execute(sql, (telefone, id))
+        if resultado.rowcount > 0:
+            conexao.commit()
+            conexao.close()
+            return True
+        else:
+            conexao.close()
+            return False
         
     @classmethod
     def alterarToken(cls, email: str, token: str) -> bool:
@@ -211,7 +267,7 @@ class ClienteRepo:
     
     @classmethod
     def obterPorId(cls, id: int) -> Cliente | None:
-        sql = "SELECT id, nome, cpf, email, telefone, admin WHERE id=?"
+        sql = "SELECT id, nome, cpf, email, telefone, admin FROM cliente WHERE id=?"
         conexao = Database.criarConexao()
         cursor = conexao.cursor()
         resultado = cursor.execute(sql, (id,)).fetchone()
@@ -228,6 +284,26 @@ class ClienteRepo:
         else: 
             return None
         
+    # @classmethod
+    # def obterPorId(cls, id: int) -> Aluno | None:
+    #     sql = "SELECT aluno.id, aluno.nome, aluno.email, aluno.admin, aluno.aprovado, aluno.idProjeto, projeto.nome AS nomeProjeto FROM aluno INNER JOIN projeto ON aluno.idProjeto = projeto.id WHERE aluno.id=?"
+    #     conexao = Database.criarConexao()
+    #     cursor = conexao.cursor()
+    #     resultado = cursor.execute(sql, (id,)).fetchone()
+    #     if (resultado):
+    #         objeto = Aluno(
+    #             id=resultado[0],
+    #             nome=resultado[1],
+    #             email=resultado[2],
+    #             admin=resultado[3],
+    #             aprovado=resultado[4],
+    #             idProjeto=resultado[5],
+    #             nomeProjeto=resultado[6],
+    #         )
+    #         return objeto
+    #     else: 
+    #         return None
+
     @classmethod
     def obterClientePorToken(cls, token: str) -> Usuario:
         sql = "SELECT id, nome, email, admin FROM cliente WHERE token=?"

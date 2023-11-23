@@ -33,3 +33,18 @@ async def getPlano2(request: Request, usuario: Usuario = Depends(validar_usuario
 async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
     return templates.TemplateResponse(
         "penacova/plano3.html", { "request": request, "usuario" : usuario })
+
+@router.get("/plano1pagar")
+async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
+    return templates.TemplateResponse(
+        "penacova/plano1pagar.html", { "request": request, "usuario" : usuario })
+
+@router.get("/plano2pagar")
+async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
+    return templates.TemplateResponse(
+        "penacova/plano2pagar.html", { "request": request, "usuario" : usuario })
+
+@router.get("/plano3pagar")
+async def getPlano3(request: Request, usuario: Usuario = Depends(validar_usuario_logado)):
+    return templates.TemplateResponse(
+        "penacova/plano3pagar.html", { "request": request, "usuario" : usuario })

@@ -1,0 +1,62 @@
+{% extends "basepnc.html" %}
+
+{% block conteudo %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/lib/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/static/css/cores.css">
+    <title>Pé Na Cova</title>
+  </head>
+  
+  
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-5 py-1">
+        <div class="card my-5" style="background-color: rgb(71, 57, 36);">
+          <div class="card-body text-light">
+            <h2 class="card-title text-center mb-4"> Página de pagamento</h2>
+            <h2 class="card-title text-center mb-3"><img width="90px" height="100px" src="/static/img/download.png">
+            </h2>
+            <h4 class="card-title text-center my-3"> Cartão de crédito</h4>
+            <form method="post">
+              <div class="mb-3 bi-person-fill">
+                <label for="nome" class="form-label">Nome do titular</label>
+                <input type="text" placeholder="Digite seu nome completo" class="form-control" id="nome" name="nome">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-card-heading">
+                <label for="cpf" class="form-label">CPF do titular</label>
+                <input type="text" placeholder="Digite seu CPF" class="form-control" id="cpf" name="cpf">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-credit-card">
+                <label for="cartao" class="form-label">Número do cartão</label>
+                <input type="text" placeholder="Digite o número do cartão" class="form-control" id="cartao" name="cartao">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-credit-card-2-back">
+                <label for="cvv" class="form-label">CVV (Código de segurança)</label>
+                <input type="text" placeholder="Digítos impressos no verso do cartão" class="form-control" id="cvv" name="cvv">
+                <span class="text-warning d-none small"></span>
+              </div>
+              <div class="mb-3 bi-calendar-event">
+                <label for="data" class="form-label">Data de validade </label>
+                <input type="text" placeholder="Digite a data de validade do cartão" class="form-control" id="data" name="data">
+                <span class="text-warning d-none small"></span>
+              </div>
+  
+              <div class="text-center my-3">
+                <h1> Valor: <small> R$39,99 </small> </h1>
+                <button type="reset" class="btn btn-secondary btn-lg">Cancelar</button>
+                <button type="submit" class="btn btn-success btn-lg">Assinar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
