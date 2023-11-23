@@ -194,6 +194,14 @@ class ClienteRepo:
         return bool(resultado[0])
     
     @classmethod
+    def cpfExiste(cls, cpf: str) -> bool:
+        sql = "SELECT EXISTS (SELECT 1 FROM cliente WHERE cpf=?)"
+        conexao = Database.criarConexao()
+        cursor = conexao.cursor()
+        resultado = cursor.execute(sql, (cpf,)).fetchone()        
+        return bool(resultado[0])
+    
+    @classmethod
     def obterSenhaDeEmail(cls, email: str) -> str | None:
         sql = "SELECT senha FROM cliente WHERE email=?"
         conexao = Database.criarConexao()

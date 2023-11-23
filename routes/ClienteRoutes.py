@@ -52,6 +52,9 @@ async def postRegistro(
     is_person_fullname(nome, "nome", erros)
     # validação do campo cpf
     is_not_empty(cpf, "cpf", erros)
+    if is_cpf(cpf, "cpf", erros):
+        if ClienteRepo.cpfExiste(cpf):
+            add_error("cpf", "Já existe um cliente cadastrado com este cpf.", erros)
     # validação do campo email
     is_not_empty(email, "email", erros)
     if is_email(email, "email", erros):
